@@ -40,6 +40,66 @@ function computation() {
     const subject8 = document.getElementById("subject7").value;
     const subject9 = document.getElementById("subject8").value;
 
-    output.push(subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9);
-    console.log(output);
-    };
+    const grade1 = document.getElementById("grade").value;
+    const grade2 = document.getElementById("grade1").value;
+    const grade3 = document.getElementById("grade2").value;
+    const grade4 = document.getElementById("grade3").value;
+    const grade5 = document.getElementById("grade4").value;
+    const grade6 = document.getElementById("grade5").value;
+    const grade7 = document.getElementById("grade6").value;
+    const grade8 = document.getElementById("grade7").value;
+    const grade9 = document.getElementById("grade8").value;
+
+    output.push(
+        {"id":"1","sub":subject1, "gr":grade1},
+        {"id":"2","sub":subject2, "gr":grade2},
+        {"id":"3","sub":subject3, "gr":grade3},
+        {"id":"4","sub":subject4, "gr":grade4},
+        {"id":"5","sub":subject5, "gr":grade5},
+        {"id":"6","sub":subject6, "gr":grade6},
+        {"id":"7","sub":subject7, "gr":grade7},
+        {"id":"8","sub":subject8, "gr":grade8},
+        {"id":"9","sub":subject9, "gr":grade9},
+        );
+        console.log(output);
+    const HumanSub = output.filter(e => {
+         return e.sub == "Humans";})
+    const HumanGr = HumanSub.sort(function(a,b) {
+        return parseFloat(a.gr) - parseFloat(b.gr);
+    });
+    console.log(HumanGr);
+    const R2 = +HumanGr[0].gr + +HumanGr[1].gr;
+    const filtered = output.filter(e => {
+        return e.id != HumanGr[1].id && e.id != HumanGr[0].id;
+    });
+    console.log(R2);
+    console.log(filtered);
+
+    const EngSub = filtered.filter(e => {
+        return e.sub == "English";
+    });
+    console.log(EngSub);
+    const L1R2 = R2 + +EngSub[0].gr;
+    console.log(L1R2);
+    const filtered1 = filtered.filter(e => {
+        return e.id != EngSub[0].id;
+    });    
+    const MathSciSub = filtered1.filter(e => {
+        return e.sub == "Maths/Science" 
+    }); 
+    const MathSciGr = MathSciSub.sort(function(a,b) {
+        return parseFloat(a.gr) - parseFloat(b.gr);
+    });
+
+    const L1R3 = L1R2 + +MathSciGr[0].gr;
+    const filtered2 = filtered1.filter(e => e.id =! MathSciGr[0].id);
+
+    const filtered3 = filtered2.sort((a,b) => {
+        parseFloat(a.gr) - parseFloat(b.gr)});
+
+    const L1R5 = L1R3 + +filtered3[0].gr + +filtered3[1].gr;
+    console.log(L1R5);
+        
+    const div = document.getElementById("l1r5");
+    div.innerHTML = L1R5;    
+};
