@@ -79,7 +79,8 @@ function computation() {
         return e.sub == "English";
     });
     console.log(EngSub);
-    const L1R2 = R2 + +EngSub[0].gr;
+    const L1 = EngSub[0].gr;
+    const L1R2 = R2 + +L1;
     console.log(L1R2);
     const filtered1 = filtered.filter(e => {
         return e.id != EngSub[0].id;
@@ -93,13 +94,25 @@ function computation() {
 
     const L1R3 = L1R2 + +MathSciGr[0].gr;
     const filtered2 = filtered1.filter(e => e.id =! MathSciGr[0].id);
+    console.log(filtered2);
+    
 
     const filtered3 = filtered2.sort((a,b) => {
         parseFloat(a.gr) - parseFloat(b.gr)});
 
     const L1R5 = L1R3 + +filtered3[0].gr + +filtered3[1].gr;
     console.log(L1R5);
+
+    const CCA = document.forms["CCAPoints"]
+    var FinalL1R5 = "";
+    var i;
+    for (i=0; i< CCA.length; i++) {
         
+        if (CCA[i].checked) {
+            FinalL1R5 = +FinalL1R5 + L1R5 + +CCA[i].value;
+        };
+    };
     const div = document.getElementById("l1r5");
-    div.innerHTML = L1R5;    
+    div.innerHTML = `Your L1R5 is ${FinalL1R5}`;
+        
 };
