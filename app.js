@@ -26,6 +26,14 @@ if (Submit){
     Submit.addEventListener("click", () => {computation()});
 };
 
+function selectOnlyThis(id){
+    const myCheckbox = document.getElementsByName("myCheckbox");
+    Array.prototype.forEach.call(myCheckbox,function(el){
+      el.checked = false;
+    });
+    id.checked = true;
+  }
+
 output = [];
 
 function computation() {
@@ -93,12 +101,17 @@ function computation() {
     });
 
     const L1R3 = L1R2 + +MathSciGr[0].gr;
+    console.log(L1R3);
+    
     const filtered2 = filtered1.filter(e => e.id != MathSciGr[0].id);
     console.log(filtered2);
     
 
-    const filtered3 = filtered2.sort((a,b) => {
-        parseFloat(a.gr) - parseFloat(b.gr)});
+    const filtered3 = filtered2.sort((function (a,b) {
+        return parseFloat(a.gr) - parseFloat(b.gr);}
+        ));
+    console.log(filtered3);
+        
 
     const L1R5 = L1R3 + +filtered3[0].gr + +filtered3[1].gr;
     console.log(L1R5);
@@ -113,6 +126,6 @@ function computation() {
         };
     };
     const div = document.getElementById("l1r5");
-    div.innerHTML = `Your L1R5 is ${FinalL1R5}`;
+    div.innerHTML = `Your raw L1R5 is ${L1R5} and your final L1R5 is ${FinalL1R5}`;
         
 };

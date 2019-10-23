@@ -32,3 +32,19 @@ select {
 .CCA {
     margin-left: 30px;
 }
+li {
+    list-style: none;
+    display: inline;
+}
+
+
+@media only screen and (max-width: 600px) {
+    li {
+        overflow: hidden;
+        float: center;
+        list-style: none;
+        display: block;
+    }
+}
+
+
