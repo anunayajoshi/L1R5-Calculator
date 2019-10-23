@@ -51,15 +51,15 @@ function computation() {
     const grade9 = document.getElementById("grade8").value;
 
     output.push(
-        {"id":"1","sub":subject1, "gr":grade1},
-        {"id":"2","sub":subject2, "gr":grade2},
-        {"id":"3","sub":subject3, "gr":grade3},
-        {"id":"4","sub":subject4, "gr":grade4},
-        {"id":"5","sub":subject5, "gr":grade5},
-        {"id":"6","sub":subject6, "gr":grade6},
-        {"id":"7","sub":subject7, "gr":grade7},
-        {"id":"8","sub":subject8, "gr":grade8},
-        {"id":"9","sub":subject9, "gr":grade9},
+        {"id":"a","sub":subject1, "gr":grade1},
+        {"id":"b","sub":subject2, "gr":grade2},
+        {"id":"c","sub":subject3, "gr":grade3},
+        {"id":"d","sub":subject4, "gr":grade4},
+        {"id":"e","sub":subject5, "gr":grade5},
+        {"id":"f","sub":subject6, "gr":grade6},
+        {"id":"g","sub":subject7, "gr":grade7},
+        {"id":"h","sub":subject8, "gr":grade8},
+        {"id":"j","sub":subject9, "gr":grade9},
         );
         console.log(output);
     const HumanSub = output.filter(e => {
@@ -67,7 +67,6 @@ function computation() {
     const HumanGr = HumanSub.sort(function(a,b) {
         return parseFloat(a.gr) - parseFloat(b.gr);
     });
-    console.log(HumanGr);
     const R2 = +HumanGr[0].gr + +HumanGr[1].gr;
     const filtered = output.filter(e => {
         return e.id != HumanGr[1].id && e.id != HumanGr[0].id;
@@ -78,13 +77,14 @@ function computation() {
     const EngSub = filtered.filter(e => {
         return e.sub == "English";
     });
-    console.log(EngSub);
     const L1 = EngSub[0].gr;
     const L1R2 = R2 + +L1;
     console.log(L1R2);
     const filtered1 = filtered.filter(e => {
         return e.id != EngSub[0].id;
-    });    
+    });
+    console.log(filtered1);
+        
     const MathSciSub = filtered1.filter(e => {
         return e.sub == "Maths/Science" 
     }); 
@@ -93,7 +93,7 @@ function computation() {
     });
 
     const L1R3 = L1R2 + +MathSciGr[0].gr;
-    const filtered2 = filtered1.filter(e => e.id =! MathSciGr[0].id);
+    const filtered2 = filtered1.filter(e => e.id != MathSciGr[0].id);
     console.log(filtered2);
     
 
