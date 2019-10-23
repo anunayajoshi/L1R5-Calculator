@@ -127,5 +127,5 @@ function computation() {
     };
     const div = document.getElementById("l1r5");
     div.innerHTML = `Your raw L1R5 is ${L1R5} and your final L1R5 is ${FinalL1R5}`;
-        
+    document.getElementById( 'l1r5' ).scrollIntoView();    
 };
