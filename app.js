@@ -1,11 +1,11 @@
 for(i=1; i<9; i++) {
-    var subject=document.getElementById("subject");
+    var subject = document.getElementById("subject");
     var newSubject = subject.cloneNode(true);
-    newSubject.id='subject'+i;
+    newSubject.id = 'subject'+i;
 
-    var grade=document.getElementById("grade");
+    var grade = document.getElementById("grade");
     var newGrade = grade.cloneNode(true);
-    newGrade.id='grade'+i;
+    newGrade.id = 'grade'+i;
 
     var linebreak = document.createElement("br");
 
@@ -69,31 +69,52 @@ function computation() {
         {"id":"h","sub":subject8, "gr":grade8},
         {"id":"j","sub":subject9, "gr":grade9},
         );
-        console.log(output);
+        console.log("All the subjects and graded inputted", output);
+        
     const HumanSub = output.filter(e => {
          return e.sub == "Humans";})
     const HumanGr = HumanSub.sort(function(a,b) {
         return parseFloat(a.gr) - parseFloat(b.gr);
     });
     const R2 = +HumanGr[0].gr + +HumanGr[1].gr;
-    const filtered = output.filter(e => {
+    let filtered = output.filter(e => {
         return e.id != HumanGr[1].id && e.id != HumanGr[0].id;
     });
-    console.log(R2);
-    console.log(filtered);
+    console.log("2 Humanities Combined Grade", R2);
+    console.log("Subjects except 2 Humans",filtered);
 
     const EngSub = filtered.filter(e => {
         return e.sub == "English";
     });
-    const L1 = EngSub[0].gr;
-    const L1R2 = R2 + +L1;
-    console.log(L1R2);
-    const filtered1 = filtered.filter(e => {
-        return e.id != EngSub[0].id;
+    const HigherMTSub = filtered.filter(e => {
+        return e.sub == "HigherMT"; 
     });
-    console.log(filtered1);
+    console.log(HigherMTSub);
+    let L1 = ""
+    if (HigherMTSub.length !== 0) {
+        if (+EngSub[0].gr - 2 > +HigherMTSub[0].gr) {
+            L1 = HigherMTSub[0].gr; 
+            var L1R2 = R2 + +L1;
+            console.log("2 Humans + Higher MT" ,L1R2);
+            filtered = filtered.filter(e => {
+                return e.id != HigherMTSub[0].id;
+        });
+    } else {
+        L1 = EngSub[0].gr; 
+        var L1R2 = R2 + +L1; 
+        console.log("2 Humans + Eng" ,L1R2); 
+        filtered = filtered.filter(e => {
+            return e.id != EngSub[0].id;
+        })}} else {
+            L1 = EngSub[0].gr; 
+            var L1R2 = R2 + +L1; 
+            console.log("2 Humans + Eng" ,L1R2); 
+            filtered = filtered.filter(e => {
+                return e.id != EngSub[0].id;
+        })};
+    console.log("Subjects except 2 Humans and 1 Eng/Higher MT",filtered);
         
-    const MathSciSub = filtered1.filter(e => {
+    const MathSciSub = filtered.filter(e => {
         return e.sub == "Maths/Science" 
     }); 
     const MathSciGr = MathSciSub.sort(function(a,b) {
@@ -101,31 +122,36 @@ function computation() {
     });
 
     const L1R3 = L1R2 + +MathSciGr[0].gr;
-    console.log(L1R3);
+    console.log("2 Human, 1 Eng/HigherMT, 1 Math/Sci",L1R3);
     
-    const filtered2 = filtered1.filter(e => e.id != MathSciGr[0].id);
-    console.log(filtered2);
-    
+    filtered = filtered.filter(e => e.id != MathSciGr[0].id);
 
-    const filtered3 = filtered2.sort((function (a,b) {
+    filtered = filtered.sort((function (a,b) {
         return parseFloat(a.gr) - parseFloat(b.gr);}
         ));
-    console.log(filtered3);
-        
-
-    const L1R5 = L1R3 + +filtered3[0].gr + +filtered3[1].gr;
-    console.log(L1R5);
+    console.log("Subs except 2 Humans, 1 Eng/HigherMT, 1 Math/Sci", filtered);    
+    let L1R5 = 0;   
+    if (L1 = EngSub[0].gr && HigherMTSub.length !== 0) {
+        if (+filtered[1].gr - 2 > +HigherMTSub[0].gr) {
+            L1R5 = L1R3 + +filtered[0].gr + +HigherMTSub[0].gr;
+            } else {
+                L1R5 = L1R3 + +filtered[0].gr + +filtered[1].gr - 2;
+            };
+        } else {
+            L1R5 = L1R3 + +filtered[0].gr + +filtered[1].gr;
+        };    
+    console.log("L1R5" , L1R5);
 
     const CCA = document.forms["CCAPoints"]
-    var FinalL1R5 = "";
+    var FinalL1R5 = 0;
     var i;
     for (i=0; i< CCA.length; i++) {
         
         if (CCA[i].checked) {
-            FinalL1R5 = +FinalL1R5 + L1R5 + +CCA[i].value;
+            FinalL1R5 = L1R5 + +CCA[i].value;
         };
     };
     const div = document.getElementById("l1r5");
-    div.innerHTML = `Your raw L1R5 is ${L1R5} and your final L1R5 is ${FinalL1R5}`;
+    div.innerHTML = `Your L1R5 is ${L1R5} and your final L1R5, removing CCA points,  is ${FinalL1R5}`;
     document.getElementById( 'l1r5' ).scrollIntoView();    
 };

@@ -23,3 +23,16 @@ give the subjects Classes
 4. filter list and search for 2 smallest numbers. add into output. 
 
 
+Alright now Higher MT exists. 
+
+- If English is used, Higher MT either deducts 2 points or used as R5. 
+how to choose btw english n higher mt for l1. 
+
+english -2 > higher mt => use higher mt
+
+    
+
+english -2 < higher mt => use english. 
+    if last subject - 2 > higher mt => use higher mt. 
+
+    last subject + 2 > higher mt => use last subject. 
